@@ -7,9 +7,12 @@ const forecast = (lat,long,callback)=>{
     	}else if(response.body.error){
     		callback('Unable to find location',undefined)
     	}else{
+            // console.log(response.body.current.weather_descriptions[0]);
     		callback(undefined,{
     			currenttemp:response.body.current.temperature,
-    			feellike:response.body.current.feelslike
+    			feellike:response.body.current.feelslike,
+                weathdesc:response.body.current.weather_descriptions[0],
+                weatimg:response.body.current.weather_icons[0]
     		});
     	}
     });

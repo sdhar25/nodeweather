@@ -15,6 +15,7 @@ weatherform.addEventListener('submit',(event)=>{
 	console.log(location);
     messageOne.textContent="Loading..."
     messageTwo.textContent='';
+    forweather.src='';
 
 	fetch('/weather?address='+location).then((response)=>{
 	response.json().then((data)=>{
@@ -23,11 +24,14 @@ weatherform.addEventListener('submit',(event)=>{
 			console.log(data.error);
 			messageOne.textContent=data.error;
 			messageTwo.textContent='';
+			forweather.src='';
 		}else{
 			console.log(data.loc);
 			console.log(data.forecast);
 			messageOne.textContent=data.loc;
-			messageTwo.textContent='Current temp- '+data.forecast.currenttemp + ' ,Feels like-  ' + data.forecast.feellike;
+			messageTwo.textContent='Current temp- '+data.forecast.currenttemp + ' ,Feels like-  ' + data.forecast.feellike + ' Weather description- '+data.forecast.weathdesc ;
+			forweather.src=data.forecast.weatimg;
+
 		}
 	})
 })
